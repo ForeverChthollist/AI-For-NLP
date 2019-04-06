@@ -1,1 +1,58 @@
 
+BEIJING, CHANGCHUN, MULUMUQI, WUHAN, GUNAGHZOU, SHENZHEN, BANGKOK, SHANGHAI, NEWYORK = """
+BEIJING CHANGCHUN MULUMUQI WUHAN GUANGZHOU SHENZHEN BANGKOK SHANGHAI NEWYORK
+""".split()
+
+connection = {
+    CHANGCHUN: [BEIJING],
+    MULUMUQI: [BEIJING], 
+    BEIJING: [MULUMUQI, CHANGCHUN, WUHAN, SHENZHEN, NEWYORK],
+    NEWYORK: [BEIJING, SHANGHAI],
+    SHANGHAI: [NEWYORK, WUHAN],
+    WUHAN: [SHANGHAI, BEIJING, GUNAGHZOU],
+    GUNAGHZOU: [WUHAN, BANGKOK],
+    SHENZHEN: [WUHAN, BANGKOK],
+    BANGKOK: [SHENZHEN, GUNAGHZOU]
+}
+
+def nagivator(start, destination,connection):
+    paths = [start,]
+    path = []
+    while paths:
+        
+        frontier = paths.pop()
+        path.append(frontier)
+        print('l am standing at : {}'.format(frontier))
+        successors = connection[frontier]
+    
+        for s in successors:
+            #print('\t\tl am looking forward  : {}'.format(s))
+            #print('\t\tl am looking forward  : {}'.format(successors))
+            if s == destination:
+                path.append(s)
+                return path
+        
+        paths += successors
+        print('\tl am looking forward  : {}'.format(paths))        
+
+def nagivator(start, destination,connection):
+    paths = [start,]
+    seen = set()
+    while paths:
+        
+        frontier = paths.pop()
+        if frontier in seen: continue
+        print('l am standing at : {}'.format(frontier))
+        successors = connection[frontier]
+        
+            
+        for s in successors:
+            #print('\t\tl am looking forward  : {}'.format(s))
+            print('\t\tl am looking forward  : {}'.format(successors))
+            if s == destination:
+                return paths
+        
+        paths += successors
+        print('\tl am looking forward  : {}'.format(paths))        
+        seen.add(frontier)
+
