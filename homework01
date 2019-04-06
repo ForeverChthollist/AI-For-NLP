@@ -15,7 +15,7 @@ connection = {
     BANGKOK: [SHENZHEN, GUNAGHZOU]
 }
 
-def nagivator(start, destination,connection):
+def nagivator(start, destination,connection):#不去重复
     paths = [start,]
     path = []
     while paths:
@@ -35,7 +35,7 @@ def nagivator(start, destination,connection):
         paths += successors
         print('\tl am looking forward  : {}'.format(paths))        
 
-def nagivator1(start, destination,connection):
+def nagivator1(start, destination,connection):#去掉重复
     paths = [start,]
     path = []
     seen = set()
@@ -57,4 +57,34 @@ def nagivator1(start, destination,connection):
         paths += successors
         print('\tl am looking forward  : {}'.format(paths))        
         seen.add(frontier)
+        
+        
 
+def nagivator3(start, destination,connection):#最短路径
+    paths = [[start] ]
+    
+    seen = set()
+    while paths:
+        path = paths.pop(0)
+        frontier = path[-1]
+        if frontier in seen: continue
+        #print('l am standing at : {}'.format(frontier))
+        successors = connection[frontier]
+        
+            
+        for s in successors:
+            #print('\t\tl am looking forward  : {}'.format(s))
+            #print('\t\tl am looking forward  : {}'.format(successors))
+            if s == destination:
+                path.append(s)
+                return path
+            else:
+                paths.append(path+[s])
+                
+            paths = sorted(paths,key = len)    
+                
+#         print(paths)
+#         print('\n')
+       
+        #print('\tl am looking forward  : {}'.format(paths))        
+        seen.add(frontier)
