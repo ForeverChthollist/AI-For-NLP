@@ -88,3 +88,40 @@ def nagivator3(start, destination,connection):#最短路径
        
         #print('\tl am looking forward  : {}'.format(paths))        
         seen.add(frontier)
+
+def nagivator_bfs(start, destination, connection_graph):
+    pathes = [start ]
+    seen = set()
+    
+    while pathes:
+        froniter = pathes.pop(0)
+        
+        if froniter in seen: continue
+            
+        successors = connection_graph[froniter]
+        print('standing on {} Looking forward {}'.format(froniter, successors))
+        pathes = pathes + successors
+                
+        seen.add(froniter)
+        
+        
+def nagivator_dfs(start, destination, connection_graph):
+    pathes = [start ]
+    seen = set()
+    
+    while pathes:
+        froniter = pathes.pop(0)
+        
+        if froniter in seen: continue
+            
+        successors = connection_graph[froniter]
+        print('standing on {} Looking forward {}'.format(froniter, successors))
+        pathes =  successors + pathes 
+                
+        seen.add(froniter)
+        
+        
+nagivator_dfs(0,7,connection_2)
+print('\n\n')
+nagivator_bfs(0,7,connection_2)       
+
