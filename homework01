@@ -35,12 +35,14 @@ def nagivator(start, destination,connection):
         paths += successors
         print('\tl am looking forward  : {}'.format(paths))        
 
-def nagivator(start, destination,connection):
+def nagivator1(start, destination,connection):
     paths = [start,]
+    path = []
     seen = set()
     while paths:
         
         frontier = paths.pop()
+        path.append(frontier)
         if frontier in seen: continue
         print('l am standing at : {}'.format(frontier))
         successors = connection[frontier]
@@ -50,7 +52,7 @@ def nagivator(start, destination,connection):
             #print('\t\tl am looking forward  : {}'.format(s))
             print('\t\tl am looking forward  : {}'.format(successors))
             if s == destination:
-                return paths
+                return path
         
         paths += successors
         print('\tl am looking forward  : {}'.format(paths))        
